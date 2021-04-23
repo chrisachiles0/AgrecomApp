@@ -8,10 +8,38 @@
 //import the PostgresNIO library
 import PostgresNIO
 
-struct DBInterface: View {
-    //
+//attempts a connection and performs verification using a provided username, password, and database information (?)
+func connect(user: String, db: String, pass: String) -> conn {
+    //connect to the sql server
+    let eventLoop: EventLoop = ...
+    let conn = try PostgresConnection.connect(
+        to: .makeAddressResolvingHost("agrecom-sql-test.postgres.database.azure.com", port: 5432),
+        on: eventLoop
+    ).wait()
+    defer { try! conn.close().wait() }
+
+    //close the connection before it deinitializes
+
+    //once connected, attempt to authenticate with the server
+    try conn.authenticate(
+        username: user,
+        database: db,
+        password: pass
+    ).wait()
 }
 
-struct DBInterface_Previews: PreviewProvider {
-    //
+// Using inputs: ****, connect to the database, query the database for a saved site, and
+// return a JSON file containing the site's information
+func getSiteInfo() ->  file{
+    var conn = connect();
+
+    /* if (connection successful) {
+
+    }
+    */
+}
+
+//Using inputs *****, connect to the database, query the database for a specific report, and return the report
+func getReport() ->  {
+    
 }
