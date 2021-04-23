@@ -9,7 +9,7 @@
 import PostgresNIO
 
 struct DBInterface: View {
-    //test
+    //
 }
 
 struct DBInterface_Previews: PreviewProvider {
